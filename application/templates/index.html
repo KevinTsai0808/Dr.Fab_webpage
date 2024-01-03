@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}
+DALab
+{% endblock title%}
+{% block content %}
+<style>
+    .slideshow-container {
+        max-width: 500px;
+        position: relative;
+        margin: auto;
+    }
+
+    .mySlides {
+        display: none;
+    }
+
+    .text-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 100%;
+    }
+
+    .text {
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .dot-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+    .dot {
+        height: 15px;
+        width: 15px;
+        margin: 0 8px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+        cursor: pointer;
+    }
+
+    .active {
+        background-color: #717171;
+    }
+</style>
+<div class="slideshow-container">
+    {% for message in get_flashed_messages() %}
+    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4" role="alert">
+        <!-- close button關不掉 -->
+        <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button> -->
+        {{ message }}
+        </div>
+    {% endfor %}
+    <div class="mySlides">
+        <img src="./static/iPHD.jpeg" alt="AIMS Fellows">
+    </div>
+    <div class="mySlides">
+        <div class="mt-4">
+            <img alt="iPHD" class="rounded-lg" height="300" src="./static/AIMS_fellows.jpeg" width="500"/>
+        </div>
+    </div>
+    <div class="dot-container">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+    </div>
+</div>
+
+<script>
+    let slideIndex = 0;
+    let timeoutId; 
+
+    showSlides();
+
+    function showSlides() {
+        let i;
+        const slides = document.getElementsByClassName("mySlides");
+        const dots = document.getElementsByClassName("dot");
+
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+            dots[i].classList.remove("active");
+        }
+
+        slideIndex++;
+
+        if (slideIndex > slides.length) {
+            slideIndex = 1;
+        }
+
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].classList.add("active");
+
+        // 重新計算時間
+        timeoutId = setTimeout(showSlides, 3000);
+    }
+
+    function currentSlide(n) {
+        clearTimeout(timeoutId); // 清除計時器
+        showSlides(); // 重新呼叫 showSlides 開始下一個計時
+        slideIndex = n;
+    }
+</script>
+
+{% endblock content%}

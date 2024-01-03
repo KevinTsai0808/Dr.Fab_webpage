@@ -1,0 +1,180 @@
+<html lang="zh-Hant">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+  <title>
+    {% block title %}
+    {% endblock title %}
+  </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+
+    body {
+        font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    #hamburgerBtn {
+        font-size: 1.5em;
+        padding: 8px;    
+    }
+
+    a {
+        color: #8B5CF6;
+        text-decoration: none; 
+    }
+
+    a:hover {
+        color: #805AD5; 
+        text-decoration: none; 
+    }
+    body {
+                font-family: 'Noto Sans TC', sans-serif;
+            }
+
+    #hamburgerBtn {
+            font-size: 1.5em;
+            padding: 8px;    
+        }
+
+  </style>
+ </head>
+ <body class="bg-gray-100">
+  <div class="container mx-auto px-4">
+   <div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <div class="px-6 py-4">
+     <div class="flex justify-between items-center">
+      <div class="flex items-center">
+       <a class="text-purple-600 text-lg font-semibold" href="{{ url_for('index') }}">
+        <img alt="DALab logo" class="mr-3" height="50" src="./static/DAlab.jpg" width="100"/>
+       </a>
+       <a class="text-purple-600 text-lg font-semibold" href="{{ url_for('index') }}">決策分析研究室</a>
+      </div>
+      <div class="flex items-center">
+        <!-- Hamburger Menu Button -->
+        <button id="hamburgerBtn" class="lg:hidden text-gray-700 text-sm mr-2">
+            <span class="block">&#9776;</span>
+        </button>
+    
+        <!-- Dropdown Navigation Links -->
+        <!-- <div id="menuDropdown" class="hidden lg:hidden absolute top-12 right-0 bg-white shadow-md rounded-lg overflow-hidden">
+            <button class="block text-gray-700 text-sm p-2">
+                <a class="text-gray-700 block" href="https://www.aims.org.tw" target="_blank">國科會補助人工智慧製造系統(AIMS)研究中心</a>
+            </button>
+            <button class="block text-gray-700 text-sm p-2">
+                <span class="text-gray-700 block">|</span>
+                <a class="text-gray-700 block" target="_blank" href="https://www.tycg.gov.tw/ch/">桃園市政府(Taoyuan City Government)</a>
+            </button>
+            <span class="text-gray-700 block p-2">|</span>
+            <span class="text-gray-700 block p-2">聯絡我們</span>
+        </div> -->
+    
+        <!-- Regular Navigation Links -->
+        <div id="menuLinks" class="hidden lg:flex items-center">
+            <button class="text-gray-700 text-sm mr-2">
+                <a class="text-gray-700" href="https://www.aims.org.tw" target="_blank">國科會補助人工智慧製造系統(AIMS)研究中心</a>
+            </button>
+            <button class="text-gray-700 text-sm mr-2">
+                <span class="text-gray-700 text-sm mr-2">|</span>
+                <a class="text-gray-700" target="_blank" href="https://www.tycg.gov.tw/ch/">桃園市政府(Taoyuan City Government)</a>
+            </button>
+            <span class="text-gray-700 text-sm mr-2">|</span>
+            <span class="text-gray-700 text-sm mr-2">聯絡我們</span>
+        </div>
+    </div>
+    
+    <script>
+        // JavaScript to toggle the visibility of the dropdown menu on clicking the hamburger button
+        document.getElementById('hamburgerBtn').addEventListener('click', function () {
+            document.getElementById('menuDropdown').classList.toggle('hidden');
+        });
+    </script>
+    
+     </div>
+     <div class="border-t border-b border-gray-300 my-4 py-2">
+      <div class="flex justify-between items-center">
+       <div class="flex space-x-4">
+        <a class="text-gray-700 text-sm" href="{{ url_for('index') }}">
+         首頁
+        </a>
+        {% if current_user.is_authenticated %}
+        <a class="text-gray-700 text-sm" href="{{ url_for('userinfo') }}">
+         初評問卷填寫
+        </a>
+        <a class="text-gray-700 text-sm" href="{{ url_for('logout') }}">
+         登出
+        </a>
+        {% else %}
+        <a class="text-gray-700 text-sm" href="{{ url_for('login') }}">
+         登入
+        </a>
+        <a class="text-gray-700 text-sm" href="{{ url_for('register') }}">
+         註冊
+        </a>
+        {% endif %}
+        <a class="text-gray-700 text-sm" href="#">
+         常見QA
+        </a>
+       </div>
+       <div class="flex space-x-2">
+        <a class="text-gray-700 text-sm" href="#">
+         相關連結 
+        </a>
+        <a class="text-gray-700 text-sm" href="#">
+         ▼
+        </a>
+       </div>
+      </div>
+     </div>
+     <div class="content flex justify-between items-center">
+      {% block content %}
+      {% endblock content %}
+     </div>
+    </div>
+    <div class="px-6 py-4 bg-gray-100">
+      <footer class="container mx-auto px-4 py-8">
+        <div class="flex justify-between">
+            <div class="w-1/3">
+                <p class="text-gray-600 text-sm">計畫補助單位:</p>
+                <img alt="government" class="rounded-lg" height="150" src="./static/government.png" width="150"/>
+                <!-- <h1 class="text-3xl font-bold">NSTC 國家科學及技術委員會</h1> -->
+                <p class="text-gray-600 text-sm mt-4">30013 新竹市光復路二段101號</p>
+                <div class="mt-4">
+                    <p class="font-medium">聯絡窗口</p>
+                    <p class="text-gray-600 text-sm mt-1">吳小姐</p>
+                    <p class="text-gray-600 text-sm mt-1">03-5743035</p>
+                    <p class="text-gray-600 text-sm mt-1">shanghengwu@mx.nthu.edu.tw</p>
+                </div>
+            </div>
+            <div class="w-1/3 px-4">
+                <h2 class="text-2xl font-bold">關於DALab</h2>
+                <hr class="border-t border-gray-400 my-2">
+                <p class="text-gray-600 text-sm mt-1">研究室簡介</p>
+                <br>
+                <br>
+                <h2 class="text-2xl font-bold">關於AIMS</h2>
+                <hr class="border-t border-gray-400 my-2">
+                <p class="text-gray-600 text-sm mt-1">理事會</p>
+                <p class="text-gray-600 text-sm mt-1">中心主任</p>
+                <p class="text-gray-600 text-sm mt-1">顧問團隊</p>
+                <p class="text-gray-600 text-sm mt-1">組織架構</p>
+                <p class="text-gray-600 text-sm mt-1">研究團隊</p>
+            </div>
+            <div class="w-1/3">
+                <h2 class="text-2xl font-bold">最新消息</h2>
+                <hr class="border-t border-gray-400 my-2">
+                <p class="text-gray-600 text-sm mt-1">活動訊息</p>
+                <p class="text-gray-600 text-sm mt-1">媒體報導</p>
+            </div>
+        </div>
+    </footer>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
